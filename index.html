@@ -27,8 +27,8 @@
 
         .tabs { display: flex; gap: 8px; width: 100%; max-width: 1100px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab-btn {
-            flex: 1; min-width: 160px; padding: 12px; border: 2px solid var(--primary); background: #ffffff;
-            color: var(--primary); font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.9rem;
+            flex: 1; min-width: 150px; padding: 12px; border: 2px solid var(--primary); background: #ffffff;
+            color: var(--primary); font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 0.85rem;
         }
         .tab-btn.active { background: var(--primary); color: #ffffff; }
 
@@ -53,87 +53,79 @@
         .stat-card h4 { font-size: 0.8rem; color: #64748b; margin-bottom: 5px; }
         .stat-card .val { font-size: 1.3rem; font-weight: bold; color: var(--primary); }
 
-        /* EDITOR RICO DE TEXTO COM OS NOVOS ROTULOS DOS MARCA-TEXTOS */
         .editor-toolbar {
-            display: flex; gap: 8px; background: #f1f5f9; padding: 8px; border: 1px solid #cbd5e1;
+            display: flex; gap: 6px; background: #f1f5f9; padding: 8px; border: 1px solid #cbd5e1;
             border-bottom: none; border-radius: 8px 8px 0 0; flex-wrap: wrap; align-items: center;
         }
         .tool-btn {
-            padding: 6px 12px; border: 1px solid #cbd5e1; background: white; border-radius: 4px;
-            font-weight: bold; cursor: pointer; font-size: 0.85rem; display: flex; align-items: center; gap: 4px;
+            padding: 5px 10px; border: 1px solid #cbd5e1; background: white; border-radius: 4px;
+            font-weight: bold; cursor: pointer; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; gap: 4px;
         }
         .tool-btn:hover { background: #e2e8f0; }
-        .hl-yellow { background: #fef08a; border-color: #facc15; color: #713f12; }
-        .hl-pink { background: #fbcfe8; border-color: #f472b6; color: #831843; }
-        .hl-orange { background: #fed7aa; border-color: #fb923c; color: #7c2d12; }
-        .hl-blue { background: #bfdbfe; border-color: #60a5fa; color: #1e3a8a; }
-        .hl-green { background: #bbf7d0; border-color: #4ade80; color: #14532d; }
+        .hl-yellow { background: #fef08a; color: #713f12; }
+        .hl-pink { background: #fbcfe8; color: #831843; }
+        .hl-orange { background: #fed7aa; color: #7c2d12; }
+        .hl-blue { background: #bfdbfe; color: #1e3a8a; }
+        .hl-green { background: #bbf7d0; color: #14532d; }
         .hl-clear { background: #ffffff; color: #64748b; }
 
         .editor-contentarea {
-            width: 100%; height: 260px; padding: 15px; border: 1px solid #cbd5e1;
+            width: 100%; height: 240px; padding: 15px; border: 1px solid #cbd5e1;
             border-radius: 0 0 8px 8px; line-height: 1.8; font-family: sans-serif; font-size: 0.95rem;
             overflow-y: auto; background: white; outline: none;
+        }
+
+        .rich-editable-box {
+            width: 100%; min-height: 70px; padding: 8px; border: 1px solid #cbd5e1;
+            border-radius: 4px; background: white; font-size: 0.85rem; outline: none; line-height: 1.5;
         }
 
         .redacao-standalone-box, .simulado-meta-box { background: #faf5ff; border: 1px solid #e9d5ff; padding: 20px; border-radius: 10px; margin-bottom: 25px; }
         .simulado-meta-box { background: #f0f9ff; border-color: #bae6fd; }
 
-        /* TABELA DINÂMICA COMPARATIVA: FRASE ERRADA X FRASE REESCRITA */
-        .phrase-item-container {
-            background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px; position: relative;
-        }
-        .phrase-pair-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+        .phrase-item-container { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; margin-bottom: 12px; position: relative; }
+        .phrase-pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-        @media (max-width: 650px) {
-            .phrase-pair-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 650px) { .phrase-pair-grid { grid-template-columns: 1fr; } }
 
         .input-box-err { background: #fff5f5; border: 1px solid #fca5a5; border-radius: 6px; padding: 8px; }
         .input-box-fix { background: #f0fdf4; border: 1px solid #86efac; border-radius: 6px; padding: 8px; }
 
-        .input-box-err label { font-size: 0.8rem; font-weight: bold; color: #dc2626; display: block; margin-bottom: 4px; }
-        .input-box-fix label { font-size: 0.8rem; font-weight: bold; color: #16a34a; display: block; margin-bottom: 4px; }
+        .input-box-err label { font-size: 0.8rem; font-weight: bold; color: #dc2626; display: block; }
+        .input-box-fix label { font-size: 0.8rem; font-weight: bold; color: #16a34a; display: block; }
 
-        .phrase-pair-grid textarea, .phrase-pair-grid select {
-            width: 100%; border: 1px solid #cbd5e1; border-radius: 4px; padding: 8px; font-size: 0.85rem; resize: vertical;
-        }
+        .btn-remove-pair { background: var(--danger); color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; cursor: pointer; float: right; margin-bottom: 6px; }
+        .btn-add-pair { background: #0284c7; color: white; border: none; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; margin-top: 5px; margin-bottom: 15px; }
 
-        .btn-remove-pair {
-            background: var(--danger); color: white; border: none; padding: 4px 8px; border-radius: 4px;
-            font-size: 0.75rem; font-weight: bold; cursor: pointer; float: right; margin-bottom: 6px;
-        }
+        .format-btn-group { display: flex; gap: 4px; align-items: center; }
 
-        .btn-add-pair {
-            background: #0284c7; color: white; border: none; padding: 8px 14px; border-radius: 6px;
-            font-size: 0.85rem; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; margin-top: 5px; margin-bottom: 15px;
-        }
+        .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .comp-card { background: white; border: 1px solid #d8b4fe; padding: 8px; border-radius: 8px; text-align: center; }
+        .comp-card label { font-size: 0.75rem; font-weight: bold; color: var(--purple); display: block; margin-bottom: 4px; }
+        .comp-card select { width: 100%; padding: 4px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: bold; text-align: center; font-size: 0.85rem; }
 
-        .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .comp-card { background: white; border: 1px solid #d8b4fe; padding: 10px; border-radius: 8px; text-align: center; }
-        .comp-card label { font-size: 0.8rem; font-weight: bold; color: var(--purple); display: block; margin-bottom: 4px; }
-        .comp-card select { width: 100%; padding: 5px; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: bold; text-align: center; }
-
-        .total-score-badge { background: var(--purple); color: white; padding: 12px; border-radius: 8px; text-align: center; font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; }
+        .total-score-badge { background: var(--purple); color: white; padding: 10px; border-radius: 8px; text-align: center; font-size: 1.1rem; font-weight: bold; margin-bottom: 20px; }
 
         .form-group { margin-bottom: 12px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: #475569; margin-bottom: 4px; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; }
 
         .saved-card { background: white; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .error-tag { background: #fee2e2; color: #dc2626; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; margin-right: 5px; display: inline-block; margin-top: 5px; }
 
-        /* TABELA DE HISTÓRICO */
-        .history-phrase-table {
-            width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem;
-        }
-        .history-phrase-table th, .history-phrase-table td {
-            border: 1px solid #cbd5e1; padding: 8px; text-align: left; vertical-align: top;
-        }
+        .error-report-card { background: #fff; border: 1px solid #fca5a5; border-left: 5px solid var(--danger); border-radius: 8px; padding: 15px; margin-bottom: 15px; transition: all 0.3s; }
+        .error-report-card.corrected { border-left-color: var(--success); border-color: #86efac; background: #f0fdf4; }
+        .error-meta-badge { background: #fee2e2; color: #991b1b; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; margin-right: 6px; display: inline-block; margin-bottom: 8px; }
+        .area-badge { background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+
+        /* TABELA DE CONTABILIDADE DE RESPOSTAS */
+        .audit-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; background: #fafafa; }
+        .audit-table th, .audit-table td { border: 1px solid #cbd5e1; padding: 6px; text-align: center; }
+        .audit-table th { background: #f1f5f9; color: #334155; }
+        .audit-ok { background: #dcfce7; color: #166534; font-weight: bold; }
+        .audit-err { background: #fee2e2; color: #991b1b; font-weight: bold; }
+
+        .history-phrase-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        .history-phrase-table th, .history-phrase-table td { border: 1px solid #cbd5e1; padding: 8px; text-align: left; vertical-align: top; }
         .history-phrase-table th.err-header { background: #fee2e2; color: #991b1b; width: 45%; }
         .history-phrase-table th.fix-header { background: #dcfce7; color: #166534; width: 45%; }
         .history-phrase-table th.cat-header { background: #f1f5f9; color: #334155; width: 10%; }
@@ -141,36 +133,44 @@
         .history-phrase-table td.fix-cell { background: #f0fdf4; color: #14532d; }
         .history-phrase-table td.cat-cell { background: #f8fafc; font-weight: bold; color: var(--purple); font-size: 0.75rem; }
 
+        .filter-bar { display: flex; gap: 10px; margin-bottom: 15px; background: #f1f5f9; padding: 10px; border-radius: 8px; align-items: center; flex-wrap: wrap; }
+
         .actions { margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end; }
         .btn { padding: 10px 18px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
         .btn-reset { background: var(--danger); color: white; }
         .btn-calc { background: var(--primary); color: white; }
         .btn-purple { background: var(--purple); color: white; }
         .btn-edit { background: #0284c7; color: white; padding: 4px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-delete { background: var(--danger); color: white; padding: 4px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-toggle-audit { background: #475569; color: white; padding: 4px 10px; font-size: 0.8rem; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-new-sim { background: #0d9488; color: white; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Notebook ENEM — Satie</h1>
-        <p class="subtitle">Oficina de Reescrita Lado a Lado & Mapeamento de Provas</p>
+        <p class="subtitle">Mapeamento Integrado de Simulados, Diagnóstico de Erros & Oficina de Redação</p>
     </header>
 
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab('day1')">📌 1º Dia (01-90)</button>
         <button class="tab-btn" onclick="switchTab('day2')">📌 2º Dia (91-180)</button>
-        <button class="tab-btn" onclick="switchTab('diag')">📊 Diagnóstico & Erros por Prova</button>
-        <button class="tab-btn" onclick="switchTab('red')">✍️ Banco de Redações & Frases Dinâmicas</button>
+        <button class="tab-btn" onclick="switchTab('diag')">📊 Diagnóstico do Simulado</button>
+        <button class="tab-btn" onclick="switchTab('err-report')">⚠️ Relatório de Erros</button>
+        <button class="tab-btn" onclick="switchTab('red')">✍️ Redações & Frases</button>
     </div>
 
     <div class="container">
         <!-- ABA 1º DIA -->
         <div id="tab-day1" class="tab-content">
+            <h4 style="margin-bottom:12px; color:var(--primary);">✍️ Cartão de Respostas do Treino — 1º Dia (Questões 01 a 90)</h4>
             <div id="grid-day1" class="grid-blocks"></div>
         </div>
 
         <!-- ABA 2º DIA -->
         <div id="tab-day2" class="tab-content" style="display:none;">
+            <h4 style="margin-bottom:12px; color:var(--primary);">✍️ Cartão de Respostas do Treino — 2º Dia (Questões 91 a 180)</h4>
             <div id="grid-day2" class="grid-blocks"></div>
         </div>
 
@@ -188,34 +188,61 @@
                         <input type="date" id="simulado-data" />
                     </div>
                 </div>
-                <div class="actions" style="justify-content: flex-start; gap: 10px; margin-top:10px;">
+                
+                <div class="actions" style="justify-content: flex-start; gap: 10px; margin-top:10px; flex-wrap:wrap;">
                     <button class="btn btn-calc" onclick="calcularDiagnostico()">🔍 Processar Diagnóstico Parcial</button>
-                    <button class="btn btn-purple" onclick="salvarSimuladoNoHistorico()">💾 Salvar/Atualizar Simulado no Histórico</button>
+                    <button class="btn btn-purple" onclick="salvarSimuladoNoHistorico()">💾 Salvar/Atualizar Simulado & Extrato</button>
+                    <button class="btn btn-new-sim" onclick="novoSimuladoLimparTela()">➕ Iniciar Nova Marcação (Limpar Tela)</button>
                 </div>
             </div>
 
             <div class="stats-grid">
                 <div class="stat-card"><h4>Acertos Parciais / Totais</h4><div class="val" id="total-acertos">0 / 0</div></div>
                 <div class="stat-card"><h4>Aproveitamento (%)</h4><div class="val" id="porcentagem-acertos">0%</div></div>
-                <div class="stat-card"><h4>Linguagens</h4><div class="val" id="acertos-ling">0 / 0</div></div>
-                <div class="stat-card"><h4>Humanas</h4><div class="val" id="acertos-hum">0 / 0</div></div>
-                <div class="stat-card"><h4>Natureza</h4><div class="val" id="acertos-nat">0 / 0</div></div>
-                <div class="stat-card"><h4>Matemática</h4><div class="val" id="acertos-mat">0 / 0</div></div>
+                <div class="stat-card"><h4>Linguagens (01-45)</h4><div class="val" id="acertos-ling">0 / 0</div></div>
+                <div class="stat-card"><h4>Humanas (46-90)</h4><div class="val" id="acertos-hum">0 / 0</div></div>
+                <div class="stat-card"><h4>Natureza (91-135)</h4><div class="val" id="acertos-nat">0 / 0</div></div>
+                <div class="stat-card"><h4>Matemática (136-180)</h4><div class="val" id="acertos-mat">0 / 0</div></div>
             </div>
 
-            <div id="painel-erros-detalhado" style="margin-top:20px; display:none;" class="card">
-                <h4 style="color:var(--danger); margin-bottom:10px;">⚠️ Análise de Questões Incorretas (Mapeamento da Prova)</h4>
-                <div id="lista-questoes-erradas"></div>
-            </div>
-
-            <h4 style="margin-bottom: 10px; color: var(--primary); margin-top:25px;">Marque abaixo o Gabarito Oficial da Prova:</h4>
+            <h4 style="margin-bottom: 10px; color: var(--primary); margin-top:25px;">📌 Marque abaixo o Gabarito Oficial da Prova para comparar:</h4>
             <div id="grid-gabarito" class="grid-blocks"></div>
 
             <div style="margin-top:35px;">
-                <h3 style="color:var(--primary); margin-bottom:15px;">📚 Histórico de Simulados Registrados</h3>
+                <h3 style="color:var(--primary); margin-bottom:15px;">📚 Histórico de Simulados & Extratos de Contabilidade</h3>
                 <div id="simulados-salvos-list">
                     <p style="color:#64748b; font-size:0.9rem;">Nenhum simulado salvo ainda.</p>
                 </div>
+            </div>
+        </div>
+
+        <!-- ABA RELATÓRIO DE QUESTÕES INCORRETAS -->
+        <div id="tab-err-report" class="tab-content" style="display:none;">
+            <h3 style="color:var(--danger); margin-bottom:8px;">⚠️ Relatório de Questões Incorretas Rastreáveis</h3>
+            <p style="color:#64748b; font-size:0.9rem; margin-bottom:15px;">Selecione um simulado específico ou veja o consolidado de todos os simulados para rastrear seus erros por Área do Conhecimento.</p>
+
+            <div class="filter-bar">
+                <div>
+                    <label style="font-weight:bold; font-size:0.85rem; color:#334155; display:block; margin-bottom:4px;">📝 Selecionar Simulado Salvo:</label>
+                    <select id="simulado-select-report" onchange="carregarRelatorioSimuladoSelecionado()" style="padding:6px; border-radius:6px; border:1px solid #cbd5e1; font-weight:bold;">
+                        <option value="ALL_SIMS">🌐 Todos os Simulados (Visão Geral de Erros)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label style="font-weight:bold; font-size:0.85rem; color:#334155; display:block; margin-bottom:4px;">📍 Filtrar por Área do Conhecimento:</label>
+                    <select id="error-area-filter" onchange="filtrarRelatorioErros()" style="padding:6px; border-radius:6px; border:1px solid #cbd5e1;">
+                        <option value="all">🌐 Todas as Áreas do Conhecimento</option>
+                        <option value="Linguagens">📚 Linguagens, Códigos e suas Tecnologias</option>
+                        <option value="Humanas">🏛️ Ciências Humanas e suas Tecnologias</option>
+                        <option value="Natureza">🧪 Ciências da Natureza e suas Tecnologias</option>
+                        <option value="Matemática">📐 Matemática e suas Tecnologias</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="detailed-error-report-list">
+                <p style="color:#64748b; font-size:0.9rem;">Selecione um simulado no menu acima ou veja todos os simulados.</p>
             </div>
         </div>
 
@@ -234,7 +261,12 @@
                     <input type="date" id="standalone-data" />
                 </div>
 
-                <!-- EDITOR RICO DE TEXTO COM OS MARCA-TEXTOS REVISADOS -->
+                <div class="form-group" style="background: white; padding: 12px; border: 1px dashed var(--purple); border-radius: 8px;">
+                    <label style="color:var(--purple); font-weight: bold;">📎 Anexar Arquivo da Redação (PDF, Imagem ou Texto):</label>
+                    <input type="file" id="redacao-file-input" onchange="handleFileUpload(event)" accept=".pdf,image/*,.txt" />
+                    <div id="file-preview-info" style="margin-top: 8px; font-size: 0.85rem; color: #475569;"></div>
+                </div>
+
                 <div class="form-group">
                     <label>📝 Texto Completo da Redação (Rascunho Original Submetido):</label>
                     <div class="editor-toolbar">
@@ -246,10 +278,9 @@
                         <button class="tool-btn hl-green" onclick="formatText('hiliteColor', '#bbf7d0')">🎨 Verde - exemplo</button>
                         <button class="tool-btn hl-clear" onclick="formatText('removeFormat')">❌ Remover Marca-Texto</button>
                     </div>
-                    <div id="standalone-editor" class="editor-contentarea" contenteditable="true" placeholder="Cole ou digite seu texto aqui para destacar a estrutura argumentativa..."></div>
+                    <div id="standalone-editor" class="editor-contentarea" contenteditable="true" placeholder="Cole ou digite seu texto aqui..."></div>
                 </div>
 
-                <!-- CORREÇÃO POR COMPETÊNCIAS -->
                 <h4 style="color:var(--purple); margin: 15px 0 10px 0;">🏆 Correção por Competências (Modelo ENEM)</h4>
                 <div class="comp-grid">
                     <div class="comp-card"><label>C1: Gramática/Sintaxe</label><select id="c1-val" onchange="calcRedacaoTotal()"><option value="200">200 pts</option><option value="160">160 pts</option><option value="120">120 pts</option><option value="80">80 pts</option><option value="40">40 pts</option><option value="0">0 pts</option></select></div>
@@ -261,21 +292,18 @@
 
                 <div class="total-score-badge" id="redacao-total-badge">NOTA FINAL DA REDAÇÃO: 1000 / 1000 PTS</div>
 
-                <!-- PAINEL DE FRASES DINÂMICAS LADO A LADO -->
                 <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 18px; border-radius: 8px; margin-top: 20px; margin-bottom: 20px;">
                     <h4 style="color:var(--primary-dark); margin-bottom:10px;">📊 Oficina de Frases: Transcrição Lado a Lado (Adicione Quantas Frases Precisar)</h4>
-                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Adicione um par de caixas para cada erro cometido. Escolha a seção do erro, digite a frase errada da sua redação e faça a reescrita correta ao lado!</p>
+                    <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Adicione um par de caixas para cada erro. Selecione o texto e use os botões para formatar em negrito ou itálico.</p>
 
-                    <!-- CONTAINER ONDE FICARÃO AS LINHAS DINÂMICAS DE FRASES -->
                     <div id="dynamic-phrases-wrapper"></div>
 
-                    <!-- BOTÃO PARA ADICIONAR MAIS UMA LINHA DE ERRO X CORREÇÃO -->
                     <button class="btn-add-pair" onclick="addPhrasePair()">➕ Adicionar Mais um Par de Frase (Erro x Reescrita)</button>
                 </div>
 
                 <div class="form-group">
                     <label>Parecer / Observações do Corretor:</label>
-                    <textarea id="red-feedback" rows="2" placeholder="Ex: Texto muito bem estruturado. Atenção ao uso dos conectivos no D2..."></textarea>
+                    <textarea id="red-feedback" rows="2" placeholder="Ex: Texto muito bem estruturado..."></textarea>
                 </div>
 
                 <div style="display:flex; gap:10px; margin-top:15px;">
@@ -284,9 +312,18 @@
                 </div>
             </div>
 
-            <!-- ACERVO DE REDAÇÕES COM TABELA DINÂMICA -->
             <div style="margin-top:30px;">
-                <h3 style="color:var(--purple); margin-bottom:15px;">📚 Meu Banco de Redações & Frases Comparadas</h3>
+                <h3 style="color:var(--purple); margin-bottom:12px;">📚 Meu Banco de Redações & Frases Comparadas</h3>
+
+                <div class="filter-bar">
+                    <label style="font-weight:bold; font-size:0.85rem; color:#334155;">🔍 Exibir no Acervo:</label>
+                    <select id="acervo-view-filter" onchange="carregarRedacoesIndependentes()">
+                        <option value="both"> Exibir Tudo (Redações Completas + Tabelas de Erros)</option>
+                        <option value="red-only">📄 Amenizar: Mostrar Somente o Texto das Redações</option>
+                        <option value="errors-only">⚠️ Amenizar: Mostrar Somente as Tabelas de Erros e Reescritas</option>
+                    </select>
+                </div>
+
                 <div id="standalone-redactions-list">
                     <p style="color:#64748b; font-size:0.9rem;">Nenhuma redação cadastrada ainda.</p>
                 </div>
@@ -303,6 +340,8 @@
         const officialAnswers = {};
         let editingRedacaoId = null;
         let editingSimuladoId = null;
+        let currentUploadedFile = null;
+        let currentErrorReport = [];
 
         function init() {
             renderGrid('grid-day1', 1, 90, userAnswers.day1, 'user');
@@ -314,9 +353,10 @@
             calcRedacaoTotal();
             
             resetPhraseWrapper();
-
             carregarRedacoesIndependentes();
             carregarSimuladosSalvos();
+            atualizarSelectSimuladosRelatorio();
+            carregarRelatorioSimuladoSelecionado();
         }
 
         function switchTab(tab) {
@@ -371,7 +411,27 @@
             }
         }
 
-        /* LÓGICA DINÂMICA DAS FRASES ERRADAS X CORRIGIDAS */
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentUploadedFile = {
+                    name: file.name,
+                    type: file.type,
+                    size: (file.size / 1024).toFixed(1) + ' KB',
+                    dataUrl: e.target.result
+                };
+                document.getElementById('file-preview-info').innerHTML = `✅ <b>Arquivo Carregado:</b> ${file.name} (${currentUploadedFile.size})`;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function execPhraseFormat(command) {
+            document.execCommand(command, false, null);
+        }
+
         function addPhrasePair(cat = 'Sintaxe & Períodos', errText = '', fixText = '') {
             const wrapper = document.getElementById('dynamic-phrases-wrapper');
             const itemDiv = document.createElement('div');
@@ -390,21 +450,31 @@
                 </div>
                 <div class="phrase-pair-grid">
                     <div class="input-box-err">
-                        <label>❌ Frase Errada Original (Transcreva o trecho da sua redação):</label>
-                        <textarea class="pair-err" rows="3" placeholder="Digite a frase com o erro exato que cometeu...">${errText}</textarea>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <label>❌ Frase Errada Original:</label>
+                            <div class="format-btn-group">
+                                <button type="button" class="tool-btn" onclick="execPhraseFormat('bold')"><b>B</b></button>
+                                <button type="button" class="tool-btn" onclick="execPhraseFormat('italic')"><i>I</i></button>
+                            </div>
+                        </div>
+                        <div class="rich-editable-box pair-err" contenteditable="true" placeholder="Digite a frase com o erro...">${errText}</div>
                     </div>
                     <div class="input-box-fix">
-                        <label>✨ Frase Corrigida (Reescrita Lado a Lado):</label>
-                        <textarea class="pair-fix" rows="3" placeholder="Digite a frase totalmente reescrita da forma correta...">${fixText}</textarea>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                            <label>✨ Frase Corrigida (Reescrita):</label>
+                            <div class="format-btn-group">
+                                <button type="button" class="tool-btn" onclick="execPhraseFormat('bold')"><b>B</b></button>
+                                <button type="button" class="tool-btn" onclick="execPhraseFormat('italic')"><i>I</i></button>
+                            </div>
+                        </div>
+                        <div class="rich-editable-box pair-fix" contenteditable="true" placeholder="Digite a frase totalmente corrigida...">${fixText}</div>
                     </div>
                 </div>
             `;
             wrapper.appendChild(itemDiv);
         }
 
-        function removePhrasePair(btn) {
-            btn.parentElement.remove();
-        }
+        function removePhrasePair(btn) { btn.parentElement.remove(); }
 
         function resetPhraseWrapper() {
             document.getElementById('dynamic-phrases-wrapper').innerHTML = '';
@@ -417,16 +487,20 @@
             const result = [];
             items.forEach(item => {
                 const cat = item.querySelector('.pair-cat').value;
-                const err = item.querySelector('.pair-err').value.trim();
-                const fix = item.querySelector('.pair-fix').value.trim();
-                if (err || fix) {
-                    result.push({ cat, err, fix });
-                }
+                const err = item.querySelector('.pair-err').innerHTML.trim();
+                const fix = item.querySelector('.pair-fix').innerHTML.trim();
+                if (err || fix) result.push({ cat, err, fix });
             });
             return result;
         }
 
-        /* DIAGNÓSTICO E SIMULADOS */
+        function getAreaCategory(q) {
+            if (q <= 45) return { key: 'Linguagens', label: 'Linguagens, Códigos e suas Tecnologias' };
+            if (q <= 90) return { key: 'Humanas', label: 'Ciências Humanas e suas Tecnologias' };
+            if (q <= 135) return { key: 'Natureza', label: 'Ciências da Natureza e suas Tecnologias' };
+            return { key: 'Matemática', label: 'Matemática e suas Tecnologias' };
+        }
+
         function calcularDiagnostico() {
             let totalRespondidas = 0, totalAcertos = 0;
             let lingResp = 0, lingAcertos = 0;
@@ -434,7 +508,7 @@
             let natResp = 0, natAcertos = 0;
             let matResp = 0, matAcertos = 0;
 
-            const questoesErradas = [];
+            currentErrorReport = [];
             const provaNome = document.getElementById('simulado-nome').value.trim() || 'Simulado Geral';
 
             for (let q = 1; q <= 180; q++) {
@@ -453,7 +527,10 @@
                     if (acertou) {
                         totalAcertos++;
                     } else if (offAns) {
-                        questoesErradas.push({ q, userAns, offAns });
+                        const areaInfo = getAreaCategory(q);
+                        currentErrorReport.push({
+                            q, userAns, offAns, areaKey: areaInfo.key, areaLabel: areaInfo.label, provaNome
+                        });
                     }
                 }
             }
@@ -467,23 +544,159 @@
             document.getElementById('acertos-nat').innerText = `${natAcertos} / ${natResp}`;
             document.getElementById('acertos-mat').innerText = `${matAcertos} / ${matResp}`;
 
-            const painelErros = document.getElementById('painel-erros-detalhado');
-            const listaErrosDiv = document.getElementById('lista-questoes-erradas');
+            filtrarRelatorioErros();
 
-            if (questoesErradas.length > 0) {
-                painelErros.style.display = 'block';
-                listaErrosDiv.innerHTML = `<p style="font-size:0.85rem; color:#475569; margin-bottom:8px;"><b>Caderno:</b> ${provaNome}</p>`;
-                questoesErradas.forEach(e => {
-                    const tag = document.createElement('span');
-                    tag.className = 'error-tag';
-                    tag.innerText = `Q${e.q}: Sua [${e.userAns}] ➔ Gabarito [${e.offAns}]`;
-                    listaErrosDiv.appendChild(tag);
-                });
-            } else {
-                painelErros.style.display = 'none';
+            return { totalRespondidas, totalAcertos, pctTotal, currentErrorReport, provaNome };
+        }
+
+        function novoSimuladoLimparTela() {
+            editingSimuladoId = null;
+            document.getElementById('simulado-nome').value = '';
+            document.getElementById('simulado-data').valueAsDate = new Date();
+
+            for (let q = 1; q <= 180; q++) {
+                delete userAnswers.day1[q]; 
+                delete userAnswers.day2[q]; 
+                delete officialAnswers[q];
             }
 
-            return { totalRespondidas, totalAcertos, pctTotal, questoesErradas, provaNome };
+            renderGrid('grid-day1', 1, 90, userAnswers.day1, 'user');
+            renderGrid('grid-day2', 91, 180, userAnswers.day2, 'user');
+            renderGrid('grid-gabarito', 1, 180, officialAnswers, 'official');
+
+            document.getElementById('total-acertos').innerText = '0 / 0';
+            document.getElementById('porcentagem-acertos').innerText = '0%';
+            document.getElementById('acertos-ling').innerText = '0 / 0';
+            document.getElementById('acertos-hum').innerText = '0 / 0';
+            document.getElementById('acertos-nat').innerText = '0 / 0';
+            document.getElementById('acertos-mat').innerText = '0 / 0';
+
+            currentErrorReport = [];
+            document.getElementById('detailed-error-report-list').innerHTML = '<p style="color:#64748b; font-size:0.9rem;">Selecione um simulado no menu acima ou veja todos os simulados.</p>';
+
+            alert("✨ Tela limpa com sucesso! As marcações atuais foram zeradas. O seu histórico permanece gravado intacto!");
+        }
+
+        function atualizarSelectSimuladosRelatorio() {
+            const simulados = JSON.parse(localStorage.getItem('enem_simulados_historico') || '[]');
+            const select = document.getElementById('simulado-select-report');
+            select.innerHTML = '<option value="ALL_SIMS">🌐 Todos os Simulados (Visão Geral de Erros)</option>';
+
+            simulados.slice().reverse().forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.innerText = `${s.nome} (${s.data}) - ${s.totalAcertos}/${s.totalRespondidas} acertos`;
+                select.appendChild(opt);
+            });
+        }
+
+        function carregarRelatorioSimuladoSelecionado() {
+            const val = document.getElementById('simulado-select-report').value;
+            const simulados = JSON.parse(localStorage.getItem('enem_simulados_historico') || '[]');
+
+            currentErrorReport = [];
+
+            if (val === "ALL_SIMS") {
+                simulados.forEach(s => {
+                    for (let q = 1; q <= 180; q++) {
+                        const userAns = q <= 90 ? (s.userAnswers?.day1 ? s.userAnswers.day1[q] : null) : (s.userAnswers?.day2 ? s.userAnswers.day2[q] : null);
+                        const offAns = s.officialAnswers ? s.officialAnswers[q] : null;
+
+                        if (userAns && offAns && userAns !== offAns) {
+                            const areaInfo = getAreaCategory(q);
+                            currentErrorReport.push({
+                                q, userAns, offAns, areaKey: areaInfo.key, areaLabel: areaInfo.label, provaNome: s.nome
+                            });
+                        }
+                    }
+                });
+            } else if (val) {
+                const item = simulados.find(s => s.id == val);
+                if (item) {
+                    for (let q = 1; q <= 180; q++) {
+                        const userAns = q <= 90 ? (item.userAnswers?.day1 ? item.userAnswers.day1[q] : null) : (item.userAnswers?.day2 ? item.userAnswers.day2[q] : null);
+                        const offAns = item.officialAnswers ? item.officialAnswers[q] : null;
+
+                        if (userAns && offAns && userAns !== offAns) {
+                            const areaInfo = getAreaCategory(q);
+                            currentErrorReport.push({
+                                q, userAns, offAns, areaKey: areaInfo.key, areaLabel: areaInfo.label, provaNome: item.nome
+                            });
+                        }
+                    }
+                }
+            }
+
+            filtrarRelatorioErros();
+        }
+
+        function filtrarRelatorioErros() {
+            const areaFilter = document.getElementById('error-area-filter').value;
+            const container = document.getElementById('detailed-error-report-list');
+
+            if (!currentErrorReport || currentErrorReport.length === 0) {
+                container.innerHTML = '<p style="color:#10b981; font-weight:bold; font-size:0.9rem;">🎉 Nenhuma questão incorreta encontrada!</p>';
+                return;
+            }
+
+            const filteredList = areaFilter === 'all' 
+                ? currentErrorReport 
+                : currentErrorReport.filter(item => item.areaKey === areaFilter);
+
+            if (filteredList.length === 0) {
+                container.innerHTML = `<p style="color:#10b981; font-weight:bold;">🎉 Nenhuma questão incorreta encontrada para esta área (${areaFilter})!</p>`;
+                return;
+            }
+
+            container.innerHTML = `<h4 style="color:var(--primary); margin-bottom:12px;">📋 Exibindo ${filteredList.length} questão(ões) incorreta(s)</h4>`;
+
+            filteredList.forEach((e, idx) => {
+                const card = document.createElement('div');
+                card.className = 'error-report-card';
+                card.id = `error-card-q-${e.q}-${idx}`;
+
+                card.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap;">
+                        <div>
+                            <span class="error-meta-badge">Questão ${e.q}</span>
+                            <span class="area-badge">📍 ${e.areaLabel}</span>
+                        </div>
+                        <label style="font-size:0.85rem; font-weight:bold; color:var(--success); cursor:pointer; background:white; padding:4px 8px; border-radius:6px; border:1px solid #86efac;">
+                            <input type="checkbox" onchange="toggleErrorStatus('error-card-q-${e.q}-${idx}', this)" /> ✅ Marcar como Totalmente Corrigida
+                        </label>
+                    </div>
+
+                    <p style="font-size:0.85rem; margin-top:8px; color:#475569;">
+                        <b>Simulado:</b> ${e.provaNome} | <b>Sua Marcação:</b> <span style="color:var(--danger); font-weight:bold;">[${e.userAns}]</span> | <b>Gabarito Oficial:</b> <span style="color:var(--success); font-weight:bold;">[${e.offAns}]</span>
+                    </p>
+                    
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin-top:12px; background:#fafafa; padding:10px; border-radius:6px; border:1px solid #e2e8f0;">
+                        <div>
+                            <label style="font-size:0.8rem; font-weight:bold; color:#334155;">❓ Motivo do Erro:</label>
+                            <select style="width:100%; padding:4px; font-size:0.8rem; border-radius:4px; border:1px solid #cbd5e1;">
+                                <option value="Falta de Atenção / Interpretação">Falta de Atenção / Interpretação do Enunciado</option>
+                                <option value="Lacuna de Conteúdo Teórico">Lacuna de Conteúdo Teórico</option>
+                                <option value="Erro de Cálculo / Fórmula">Erro de Cálculo / Fórmula</option>
+                                <option value="Gestão de Tempo">Gestão de Tempo / Pressão</option>
+                                <option value="Pegadinha / Distrator">Pegadinha / Distrator Forte</option>
+                            </select>
+                        </div>
+                        <div style="display:flex; flex-direction:column; justify-content:center; gap:4px;">
+                            <label style="font-size:0.8rem; cursor:pointer;"><input type="checkbox"> 📖 Revisão teórica realizada</label>
+                            <label style="font-size:0.8rem; cursor:pointer;"><input type="checkbox"> ✍️ Bateria de exercícios praticada</label>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleErrorStatus(cardId, checkbox) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                if (checkbox.checked) card.classList.add('corrected');
+                else card.classList.remove('corrected');
+            }
         }
 
         function salvarSimuladoNoHistorico() {
@@ -510,41 +723,37 @@
 
             if (editingSimuladoId !== null) {
                 simulados = simulados.map(item => item.id === editingSimuladoId ? objetoSimulado : item);
-                alert("✅ Simulado atualizado!");
+                alert("✅ Simulado e Extrato Atualizados com Sucesso!");
             } else {
                 simulados.push(objetoSimulado);
-                alert("✅ Simulado salvo com sucesso!");
+                alert("✅ Simulado e Extrato Salvos com Sucesso!");
             }
 
             localStorage.setItem('enem_simulados_historico', JSON.stringify(simulados));
             editingSimuladoId = null;
             carregarSimuladosSalvos();
+            atualizarSelectSimuladosRelatorio();
         }
 
-        function editarSimulado(id) {
-            const simulados = JSON.parse(localStorage.getItem('enem_simulados_historico') || '[]');
-            const item = simulados.find(s => s.id === id);
-            if (!item) return;
-
-            editingSimuladoId = id;
-            document.getElementById('simulado-nome').value = item.nome;
-            document.getElementById('simulado-data').value = item.data;
-
-            Object.assign(userAnswers, item.userAnswers || { day1: {}, day2: {} });
-            Object.assign(officialAnswers, item.officialAnswers || {});
-
-            renderGrid('grid-day1', 1, 90, userAnswers.day1, 'user');
-            renderGrid('grid-day2', 91, 180, userAnswers.day2, 'user');
-            renderGrid('grid-gabarito', 1, 180, officialAnswers, 'official');
-
-            for (let q in userAnswers.day1) markBubble(q, userAnswers.day1[q], 'user');
-            for (let q in userAnswers.day2) markBubble(q, userAnswers.day2[q], 'user');
-            for (let q in officialAnswers) markBubble(q, officialAnswers[q], 'official');
-
-            calcularDiagnostico();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function toggleAuditTable(id) {
+            const el = document.getElementById(`audit-box-${id}`);
+            if (el) {
+                el.style.display = el.style.display === 'none' ? 'block' : 'none';
+            }
         }
 
+        function excluirSimulado(id) {
+            if (confirm("Tem certeza de que deseja excluir este simulado do histórico?")) {
+                let simulados = JSON.parse(localStorage.getItem('enem_simulados_historico') || '[]');
+                simulados = simulados.filter(s => s.id !== id);
+                localStorage.setItem('enem_simulados_historico', JSON.stringify(simulados));
+                carregarSimuladosSalvos();
+                atualizarSelectSimuladosRelatorio();
+                carregarRelatorioSimuladoSelecionado();
+            }
+        }
+
+        /* CONTABILIDADE DE RESPOSTAS E IMPRESSÃO DO EXTRATO DOS SIMULADOS SALVOS */
         function carregarSimuladosSalvos() {
             const simulados = JSON.parse(localStorage.getItem('enem_simulados_historico') || '[]');
             const container = document.getElementById('simulados-salvos-list');
@@ -558,18 +767,76 @@
             simulados.slice().reverse().forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'saved-card';
+
+                // Gera as linhas da tabela de contabilidade para as questões assinaladas
+                let auditRowsHTML = '';
+                let countAssinaladas = 0;
+
+                for (let q = 1; q <= 180; q++) {
+                    const uAns = q <= 90 ? (item.userAnswers?.day1 ? item.userAnswers.day1[q] : null) : (item.userAnswers?.day2 ? item.userAnswers.day2[q] : null);
+                    const oAns = item.officialAnswers ? item.officialAnswers[q] : null;
+
+                    if (uAns || oAns) {
+                        countAssinaladas++;
+                        let statusHTML = '<span style="color:#64748b;">⚠️ Sem Gabarito</span>';
+                        let classStyle = '';
+
+                        if (uAns && oAns) {
+                            if (uAns === oAns) {
+                                statusHTML = '✅ Acertou';
+                                classStyle = 'audit-ok';
+                            } else {
+                                statusHTML = '❌ Errou';
+                                classStyle = 'audit-err';
+                            }
+                        }
+
+                        auditRowsHTML += `
+                            <tr>
+                                <td><b>Q${q}</b></td>
+                                <td>${uAns ? `<b>[ ${uAns} ]</b>` : '<i style="color:#94a3b8;">— Não respondida</i>'}</td>
+                                <td>${oAns ? `<b>[ ${oAns} ]</b>` : '<i style="color:#94a3b8;">— Não cadastrado</i>'}</td>
+                                <td class="${classStyle}">${statusHTML}</td>
+                            </tr>
+                        `;
+                    }
+                }
+
                 card.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
                         <h4 style="color:var(--primary); margin-bottom:5px;">📝 ${item.nome}</h4>
-                        <button class="btn-edit" onclick="editarSimulado(${item.id})">✏️ Editar Simulado</button>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn-toggle-audit" onclick="toggleAuditTable(${item.id})">📋 Extrato das Respostas (${countAssinaladas})</button>
+                            <button class="btn-delete" onclick="excluirSimulado(${item.id})">🗑️ Excluir</button>
+                        </div>
                     </div>
-                    <p style="font-size:0.85rem; color:#64748b;"><b>Data:</b> ${item.data} | <b>Acertos:</b> ${item.totalAcertos}/${item.totalRespondidas} (${item.pct}% de aproveitamento)</p>
+                    <p style="font-size:0.85rem; color:#64748b; margin-top:4px;"><b>Data:</b> ${item.data} | <b>Desempenho:</b> ${item.totalAcertos}/${item.totalRespondidas} acertos (${item.pct}%)</p>
+                    
+                    <!-- TABELA DE EXTRATO/CONTABILIDADE DAS QUESTÕES -->
+                    <div id="audit-box-${item.id}" style="display:none; margin-top:15px; border-top:1px solid #cbd5e1; padding-top:10px;">
+                        <h5 style="color:#334155; font-size:0.85rem; margin-bottom:8px;">📊 Contabilidade Completa de Respostas x Gabarito Oficial:</h5>
+                        ${auditRowsHTML ? `
+                            <table class="audit-table">
+                                <thead>
+                                    <tr>
+                                        <th>Questão</th>
+                                        <th>Sua Marcação</th>
+                                        <th>Gabarito Oficial</th>
+                                        <th>Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${auditRowsHTML}
+                                </tbody>
+                            </table>
+                        ` : '<p style="font-size:0.8rem; color:#94a3b8;">Nenhuma questão assinalada nesta prova.</p>'}
+                    </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        /* BANCO DE REDAÇÕES & REESCRITA DINÂMICA */
+        /* REDAÇÕES & EXCLUSÃO DE REDAÇÕES */
         function formatText(cmd, val = null) { document.execCommand(cmd, false, val); }
 
         function calcRedacaoTotal() {
@@ -611,15 +878,16 @@
                 c4: document.getElementById('c4-val').value,
                 c5: document.getElementById('c5-val').value,
                 feedback,
-                phrases
+                phrases,
+                file: currentUploadedFile
             };
 
             if (editingRedacaoId !== null) {
                 redacoes = redacoes.map(item => item.id === editingRedacaoId ? objetoRedacao : item);
-                alert("✅ Redação e comparação de frases atualizadas!");
+                alert("✅ Redação e frases comparativas atualizadas!");
             } else {
                 redacoes.push(objetoRedacao);
-                alert("✅ Redação e comparação de frases salvas com sucesso!");
+                alert("✅ Redação e frases comparativas salvas com sucesso!");
             }
 
             localStorage.setItem('enem_redacoes_livres', JSON.stringify(redacoes));
@@ -639,6 +907,13 @@
             document.getElementById('standalone-editor').innerHTML = item.htmlContent || '';
             document.getElementById('red-feedback').value = item.feedback || '';
 
+            currentUploadedFile = item.file || null;
+            if (currentUploadedFile) {
+                document.getElementById('file-preview-info').innerHTML = `✅ <b>Arquivo Anexado:</b> ${currentUploadedFile.name}`;
+            } else {
+                document.getElementById('file-preview-info').innerHTML = '';
+            }
+
             document.getElementById('dynamic-phrases-wrapper').innerHTML = '';
             if (item.phrases && item.phrases.length > 0) {
                 item.phrases.forEach(p => addPhrasePair(p.cat, p.err, p.fix));
@@ -656,15 +931,28 @@
             document.getElementById('btn-save-red').innerText = "🔄 Atualizar Redação & Comparação";
             document.getElementById('btn-cancel-edit').style.display = "inline-block";
 
+            switchTab('red');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function excluirRedacao(id) {
+            if (confirm("Tem certeza de que deseja excluir esta redação do acervo?")) {
+                let redacoes = JSON.parse(localStorage.getItem('enem_redacoes_livres') || '[]');
+                redacoes = redacoes.filter(r => r.id !== id);
+                localStorage.setItem('enem_redacoes_livres', JSON.stringify(redacoes));
+                carregarRedacoesIndependentes();
+            }
         }
 
         function cancelEditingRedacao() {
             editingRedacaoId = null;
+            currentUploadedFile = null;
             document.getElementById('red-form-title').innerText = "✍️ Registrar Nova Redação";
             document.getElementById('standalone-tema').value = '';
             document.getElementById('standalone-editor').innerHTML = '';
             document.getElementById('red-feedback').value = '';
+            document.getElementById('file-preview-info').innerHTML = '';
+            document.getElementById('redacao-file-input').value = '';
             resetPhraseWrapper();
 
             document.getElementById('btn-save-red').innerText = "💾 Salvar Redação & Comparação no Acervo";
@@ -674,6 +962,7 @@
         function carregarRedacoesIndependentes() {
             const redacoes = JSON.parse(localStorage.getItem('enem_redacoes_livres') || '[]');
             const container = document.getElementById('standalone-redactions-list');
+            const viewFilter = document.getElementById('acervo-view-filter').value;
 
             if (redacoes.length === 0) {
                 container.innerHTML = '<p style="color:#64748b; font-size:0.9rem;">Nenhuma redação cadastrada ainda.</p>';
@@ -700,20 +989,32 @@
                     });
                 }
 
+                const showRedSection = viewFilter === 'both' || viewFilter === 'red-only';
+                const showErrorsSection = viewFilter === 'both' || viewFilter === 'errors-only';
+
+                let fileBtnHTML = '';
+                if (item.file && item.file.dataUrl) {
+                    fileBtnHTML = `<p style="margin-top:8px;"><a href="${item.file.dataUrl}" download="${item.file.name}" style="color:var(--purple); font-weight:bold; font-size:0.85rem; text-decoration:none;">📎 Baixar Anexo: ${item.file.name}</a></p>`;
+                }
+
                 card.innerHTML = `
                     <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                         <h4 style="color:var(--purple); margin-bottom:5px;">🎯 ${item.tema}</h4>
-                        <button class="btn-edit" onclick="editarRedacao(${item.id})">✏️ Editar / Comparar Frases</button>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn-edit" onclick="editarRedacao(${item.id})">✏️ Editar</button>
+                            <button class="btn-delete" onclick="excluirRedacao(${item.id})">🗑️ Excluir</button>
+                        </div>
                     </div>
                     <p style="font-size:0.85rem; color:#64748b; margin-bottom:12px;"><b>Data:</b> ${item.data} | <b>Nota Total:</b> <span style="color:var(--purple); font-weight:bold;">${item.score}/1000 pts</span> (C1:${item.c1} C2:${item.c2} C3:${item.c3} C4:${item.c4} C5:${item.c5})</p>
                     
-                    ${item.htmlContent ? `<div style="background:#f8fafc; padding:12px; border-radius:6px; border:1px solid #e2e8f0; font-size:0.9rem; margin-bottom:12px; line-height:1.7;"><b>Texto Submetido:</b><br>${item.htmlContent}</div>` : ''}
+                    ${fileBtnHTML}
+
+                    ${(showRedSection && item.htmlContent) ? `<div style="background:#f8fafc; padding:12px; border-radius:6px; border:1px solid #e2e8f0; font-size:0.9rem; margin-bottom:12px; line-height:1.7;"><b>Texto Submetido:</b><br>${item.htmlContent}</div>` : ''}
                     
                     ${item.feedback ? `<p style="font-size:0.85rem; background:#fffbf0; border-left:3px solid var(--warning); padding:8px; color:#92400e; margin-bottom:12px;"><b>Parecer/Dicas:</b> ${item.feedback}</p>` : ''}
                     
-                    <!-- TABELA DE COMPARAÇÃO DE FRASES -->
-                    ${phrasesRowsHTML ? `
-                        <h5 style="color:var(--primary-dark); font-size:0.85rem; margin-top:10px;">📊 Tabela Comparativa de Frases (Lado a Lado):</h5>
+                    ${(showErrorsSection && phrasesRowsHTML) ? `
+                        <h5 style="color:var(--primary-dark); font-size:0.85rem; margin-top:10px;">📊 Tabela Comparativa de Frases:</h5>
                         <table class="history-phrase-table">
                             <thead>
                                 <tr>
@@ -726,7 +1027,7 @@
                                 ${phrasesRowsHTML}
                             </tbody>
                         </table>
-                    ` : '<p style="font-size:0.8rem; color:#94a3b8; margin-top:10px;">Sem frases comparativas gravadas.</p>'}
+                    ` : ''}
                 `;
                 container.appendChild(card);
             });
