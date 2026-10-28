@@ -117,7 +117,6 @@
         .error-meta-badge { background: #fee2e2; color: #991b1b; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; margin-right: 6px; display: inline-block; margin-bottom: 8px; }
         .area-badge { background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
 
-        /* TABELA DE CONTABILIDADE DE RESPOSTAS */
         .audit-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; background: #fafafa; }
         .audit-table th, .audit-table td { border: 1px solid #cbd5e1; padding: 6px; text-align: center; }
         .audit-table th { background: #f1f5f9; color: #334155; }
@@ -154,11 +153,11 @@
     </header>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('day1')">📌 1º Dia (01-90)</button>
-        <button class="tab-btn" onclick="switchTab('day2')">📌 2º Dia (91-180)</button>
-        <button class="tab-btn" onclick="switchTab('diag')">📊 Diagnóstico do Simulado</button>
-        <button class="tab-btn" onclick="switchTab('err-report')">⚠️ Relatório de Erros</button>
-        <button class="tab-btn" onclick="switchTab('red')">✍️ Redações & Frases</button>
+        <button class="tab-btn active" onclick="switchTab('day1', event)">📌 1º Dia (01-90)</button>
+        <button class="tab-btn" onclick="switchTab('day2', event)">📌 2º Dia (91-180)</button>
+        <button class="tab-btn" onclick="switchTab('diag', event)">📊 Diagnóstico do Simulado</button>
+        <button class="tab-btn" onclick="switchTab('err-report', event)">⚠️ Relatório de Erros</button>
+        <button class="tab-btn" onclick="switchTab('red', event)">✍️ Redações & Frases</button>
     </div>
 
     <div class="container">
@@ -177,7 +176,7 @@
         <!-- ABA DIAGNÓSTICO -->
         <div id="tab-diag" class="tab-content" style="display:none;">
             <div class="simulado-meta-box">
-                <h3 style="color:var(--primary); margin-bottom:12px;">📝 Identificação do Simulado & Diagnóstico Parcial</h3>
+                <h3 id="simulado-form-title" style="color:var(--primary); margin-bottom:12px;">📝 Identificação do Simulado & Diagnóstico Parcial</h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px;">
                     <div class="form-group">
                         <label>Caderno / Prova de Origem:</label>
@@ -191,7 +190,7 @@
                 
                 <div class="actions" style="justify-content: flex-start; gap: 10px; margin-top:10px; flex-wrap:wrap;">
                     <button class="btn btn-calc" onclick="calcularDiagnostico()">🔍 Processar Diagnóstico Parcial</button>
-                    <button class="btn btn-purple" onclick="salvarSimuladoNoHistorico()">💾 Salvar/Atualizar Simulado & Extrato</button>
+                    <button class="btn btn-purple" id="btn-save-simulado" onclick="salvarSimuladoNoHistorico()">💾 Salvar/Atualizar Simulado & Extrato</button>
                     <button class="btn btn-new-sim" onclick="novoSimuladoLimparTela()">➕ Iniciar Nova Marcação (Limpar Tela)</button>
                 </div>
             </div>
@@ -359,12 +358,17 @@
             carregarRelatorioSimuladoSelecionado();
         }
 
-        function switchTab(tab) {
+        function switchTab(tab, evt) {
             document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             
             document.getElementById(`tab-${tab}`).style.display = 'block';
-            event.target.classList.add('active');
+            if (evt && evt.target) {
+                evt.target.classList.add('active');
+            } else {
+                const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick')?.includes(`'${tab}'`));
+                if (btn) btn.classList.add('active');
+            }
         }
 
         function renderGrid(containerId, start, end, storageObj, type) {
@@ -406,8 +410,10 @@
             } else {
                 storage[q] = letter;
                 const activeEl = document.getElementById(`${type}-q-${q}-${letter}`);
-                if (type === 'official') activeEl.classList.add('gab-selected');
-                else activeEl.classList.add('selected');
+                if (activeEl) {
+                    if (type === 'official') activeEl.classList.add('gab-selected');
+                    else activeEl.classList.add('selected');
+                }
             }
         }
 
@@ -551,6 +557,8 @@
 
         function novoSimuladoLimparTela() {
             editingSimuladoId = null;
+            document.getElementById('simulado-form-title').innerText = "📝 Identificação do Simulado & Diagnóstico Parcial";
+            document.getElementById('btn-save-simulado').innerText = "💾 Salvar/Atualizar Simulado & Extrato";
             document.getElementById('simulado-nome').value = '';
             document.getElementById('simulado-data').valueAsDate = new Date();
 
@@ -574,7 +582,7 @@
             currentErrorReport = [];
             document.getElementById('detailed-error-report-list').innerHTML = '<p style="color:#64748b; font-size:0.9rem;">Selecione um simulado no menu acima ou veja todos os simulados.</p>';
 
-            alert("✨ Tela limpa com sucesso! As marcações atuais foram zeradas. O seu histórico permanece gravado intacto!");
+            alert("✨ Tela limpa com sucesso! As marcações foram zeradas para iniciar uma nova prova.");
         }
 
         function atualizarSelectSimuladosRelatorio() {
@@ -723,16 +731,82 @@
 
             if (editingSimuladoId !== null) {
                 simulados = simulados.map(item => item.id === editingSimuladoId ? objetoSimulado : item);
-                alert("✅ Simulado e Extrato Atualizados com Sucesso!");
+                alert("✅ Simulado e Gabarito Oficial Atualizados com Sucesso!");
             } else {
                 simulados.push(objetoSimulado);
-                alert("✅ Simulado e Extrato Salvos com Sucesso!");
+                alert("✅ Simulado Salvo no Histórico!");
             }
 
             localStorage.setItem('enem_simulados_historico', JSON.stringify(simulados));
+            
+            // Limpa o estado de edição
             editingSimuladoId = null;
+            document.getElementById('simulado-form-title').innerText = "📝 Identificação do Simulado & Diagnóstico Parcial";
+            document.getElementById('btn-save-simulado').innerText = "💾 Salvar/Atualizar Simulado & Extrato";
+            
             carregarSimuladosSalvos();
             atualizarSelectSimuladosRelatorio();
+            carregarRelatorioSimuladoSelecionado();
+        }
+
+        /* FUNÇÃO TOTALMENTE RESTRUTURADA DE EDIÇÃO DO SIMULADO E CARREGAMENTO DAS BOLINHAS */
+        function editarSimulado(id) {
+            const simulados = JSON.parse(localStorage.getItem('enem_simulados_historico') || '[]');
+            const item = simulados.find(s => s.id === id);
+            if (!item) return;
+
+            editingSimuladoId = id;
+
+            // Altera visualmente o título do formulário
+            document.getElementById('simulado-form-title').innerText = `✏️ Editando/Inserindo Gabarito: ${item.nome}`;
+            document.getElementById('btn-save-simulado').innerText = "🔄 Salvar Alterações e Atualizar Gabarito";
+            document.getElementById('simulado-nome').value = item.nome || '';
+            document.getElementById('simulado-data').value = item.data || '';
+
+            // Zera o estado local
+            for (let q = 1; q <= 180; q++) {
+                delete userAnswers.day1[q]; 
+                delete userAnswers.day2[q]; 
+                delete officialAnswers[q];
+            }
+
+            // Clona os dados salvos para o objeto atual
+            if (item.userAnswers) {
+                if (item.userAnswers.day1) Object.assign(userAnswers.day1, item.userAnswers.day1);
+                if (item.userAnswers.day2) Object.assign(userAnswers.day2, item.userAnswers.day2);
+            }
+            if (item.officialAnswers) {
+                Object.assign(officialAnswers, item.officialAnswers);
+            }
+
+            // Redesenha a estrutura HTML das 180 questões
+            renderGrid('grid-day1', 1, 90, userAnswers.day1, 'user');
+            renderGrid('grid-day2', 91, 180, userAnswers.day2, 'user');
+            renderGrid('grid-gabarito', 1, 180, officialAnswers, 'official');
+
+            // Re-aplica a classe visual CSS nas bolinhas que possuem resposta
+            for (let q = 1; q <= 90; q++) {
+                if (userAnswers.day1[q]) {
+                    const el = document.getElementById(`user-q-${q}-${userAnswers.day1[q]}`);
+                    if (el) el.classList.add('selected');
+                }
+            }
+            for (let q = 91; q <= 180; q++) {
+                if (userAnswers.day2[q]) {
+                    const el = document.getElementById(`user-q-${q}-${userAnswers.day2[q]}`);
+                    if (el) el.classList.add('selected');
+                }
+            }
+            for (let q = 1; q <= 180; q++) {
+                if (officialAnswers[q]) {
+                    const el = document.getElementById(`official-q-${q}-${officialAnswers[q]}`);
+                    if (el) el.classList.add('gab-selected');
+                }
+            }
+
+            calcularDiagnostico();
+            switchTab('diag');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleAuditTable(id) {
@@ -753,7 +827,6 @@
             }
         }
 
-        /* CONTABILIDADE DE RESPOSTAS E IMPRESSÃO DO EXTRATO DOS SIMULADOS SALVOS */
         function carregarSimuladosSalvos() {
             const simulados = JSON.parse(localStorage.getItem('enem_simulados_historico') || '[]');
             const container = document.getElementById('simulados-salvos-list');
@@ -768,7 +841,6 @@
                 const card = document.createElement('div');
                 card.className = 'saved-card';
 
-                // Gera as linhas da tabela de contabilidade para as questões assinaladas
                 let auditRowsHTML = '';
                 let countAssinaladas = 0;
 
@@ -778,7 +850,7 @@
 
                     if (uAns || oAns) {
                         countAssinaladas++;
-                        let statusHTML = '<span style="color:#64748b;">⚠️ Sem Gabarito</span>';
+                        let statusHTML = '<span style="color:#64748b;">⚠️ Sem Gabarito Oficial</span>';
                         let classStyle = '';
 
                         if (uAns && oAns) {
@@ -806,13 +878,13 @@
                     <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px;">
                         <h4 style="color:var(--primary); margin-bottom:5px;">📝 ${item.nome}</h4>
                         <div style="display:flex; gap:6px;">
-                            <button class="btn-toggle-audit" onclick="toggleAuditTable(${item.id})">📋 Extrato das Respostas (${countAssinaladas})</button>
+                            <button class="btn-edit" onclick="editarSimulado(${item.id})">✏️ Editar / Inserir Gabarito</button>
+                            <button class="btn-toggle-audit" onclick="toggleAuditTable(${item.id})">📋 Extrato (${countAssinaladas})</button>
                             <button class="btn-delete" onclick="excluirSimulado(${item.id})">🗑️ Excluir</button>
                         </div>
                     </div>
                     <p style="font-size:0.85rem; color:#64748b; margin-top:4px;"><b>Data:</b> ${item.data} | <b>Desempenho:</b> ${item.totalAcertos}/${item.totalRespondidas} acertos (${item.pct}%)</p>
                     
-                    <!-- TABELA DE EXTRATO/CONTABILIDADE DAS QUESTÕES -->
                     <div id="audit-box-${item.id}" style="display:none; margin-top:15px; border-top:1px solid #cbd5e1; padding-top:10px;">
                         <h5 style="color:#334155; font-size:0.85rem; margin-bottom:8px;">📊 Contabilidade Completa de Respostas x Gabarito Oficial:</h5>
                         ${auditRowsHTML ? `
